@@ -1,0 +1,137 @@
+version: "3.8"
+
+volumes:
+  rabbitmq_data:
+
+services:
+
+  ###################################
+  # Patient Service
+  ###################################
+  patient:
+    build:
+      context: ./patient
+      dockerfile: Dockerfile
+    image: markuslee/patient:1.0
+    restart: always
+    environment:
+      dbURL: mysql+mysqlconnector://admin:esdDBpass1@database-1.ckxrhyi6ulnv.ap-southeast-1.rds.amazonaws.com:3306/patient_service
+      appointmentURL: http://patient:5001/appointment/
+      patientURL: http://patient:5001/patient/
+      PYTHONUNBUFFERED: 1
+    ports:
+      - "5001:5001"
+
+  #######################################################
+  # Doctor Service
+  #######################################################
+  doctor:
+    build:
+      context: ./doctor
+      dockerfile: Dockerfile
+    image: markuslee/doctor:1.0
+    restart: always
+    environment:
+      dbURL: mysql+mysqlconnector://admin:esdDBpass1@database-1.ckxrhyi6ulnv.ap-southeast-1.rds.amazonaws.com:3306/doctor_service
+      PYTHONUNBUFFERED: 1
+    ports:
+      - "5000:5000"
+
+  #######################################################
+  # Staff Service
+  #######################################################
+  Staff:
+    build:
+      context: ./staff
+      dockerfile: Dockerfile
+    image: markuslee/staff:1.0
+    restart: always
+    environment:
+      dbURL: mysql+mysqlconnector://admin:esdDBpass1@database-1.ckxrhyi6ulnv.ap-southeast-1.rds.amazonaws.com:3306/staff_service
+      PYTHONUNBUFFERED: 1
+    ports:
+      - "5004:5004"
+
+  #######################################################
+  # Payment Service
+  #######################################################
+  payment:
+    build:
+      context: ./payment
+      dockerfile: Dockerfile
+    image: markuslee/payment:1.0
+    restart: always
+    environment:
+      PYTHONUNBUFFERED: 1
+    ports:
+      - "5002:5002"
+
+
+
+  #######################################################
+  # Telegram Service
+  #######################################################
+  telegram:
+    build:
+      context: ./telegram
+      dockerfile: Dockerfile
+    image: markuslee/telegram:1.0
+    restart: always
+    environment:
+      PYTHONUNBUFFERED: 1
+    ports:
+      - "5009:5009"
+
+  ###################################
+  #RabbitMQ: The messaging broker
+  ###################################
+  rabbitmq:
+    image: rabbitmq:3-management
+    hostname: esd-rabbit
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
+  #######################################################
+  # Notification Service
+  #######################################################
+  notification:
+    build:
+      context: ./notification
+      dockerfile: Dockerfile
+    image: markuslee/notification:1.0
+    restart: always
+    depends_on:
+      - rabbitmq
+    environment:
+      PYTHONUNBUFFERED: 1
+      rabbit_host: rabbitmq
+      rabbit_port: 5672
+#    ports:
+#      - "5010:5010"
+
+  #######################################################
+  # Scheduling Service
+  #######################################################
+  Scheduling:
+    build:
+      context: ./scheduling
+      dockerfile: Dockerfile
+    image: markuslee/scheduling:1.0
+    restart: always
+    depends_on:
+      - rabbitmq
+    environment:
+      rabbit_host: rabbitmq
+      rabbit_port: 5672
+      patientURL: http://patient:5001/patient
+      appointmentURL: http://patient:5001/appointment
+      medicalURL: http://patient:5001/medical
+      doctorAvailabilityURL: http://doctor:5000/availability
+      PYTHONUNBUFFERED: 1
+    ports:
+      - "5003:5003"
+

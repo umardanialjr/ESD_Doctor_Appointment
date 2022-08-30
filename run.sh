@@ -1,0 +1,6 @@
+docker compose down
+docker compose build
+docker compose up -d
+sleep 30
+docker start esd_doctor_patient_appointment_Scheduling_1
+docker start esd_doctor_patient_appointment_notification_1

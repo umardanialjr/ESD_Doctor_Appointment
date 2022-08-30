@@ -1,0 +1,202 @@
+html, body {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+body {
+    background-size: cover;
+}
+
+.background {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    padding: 0px;
+}
+
+.overlay {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.jumbotron{
+    text-align: left;
+    background-size: cover;
+    height: 50vh;
+    /* width: 100%; */
+    padding: 25px;
+} 
+
+.banner-container {
+   color: #0a0a0a;
+
+}
+.index-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.home-card {
+    height: 10rem;
+    width: 5rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    
+}
+.card-title {
+    color: #0a0a0a;
+}
+
+.card-title:hover {
+    color: #ffff;
+}
+
+.home-card:hover {
+    background-color: #dedede;
+    transition: 0.3s ease;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    color: #ffff;
+}
+
+.card-body a:hover {
+    text-decoration: none;
+}
+.card-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    height: 100%;
+}
+
+.card-body{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    
+}
+
+/* --------LOGIN------------ */
+
+body {
+    /* display: flex; */
+    justify-content: flex-start;
+    align-items: center;
+    background-size: cover;
+    height:100%;
+    overflow: auto;
+}
+.container { 
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction:column;
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+    /* background: #bdbdbf42; */
+    padding: 25px;
+    height: 650px;
+}
+
+.container:after {
+    position: absolute;
+    border-radius: 40px 0px 0px 40px;
+}
+.login-input {
+    width:100%;
+    display:flex;
+    flex-direction: column;
+    padding: 14px 20px;
+    margin-top: 10px;
+}
+.login-form {
+    width: 100%;
+    padding: 0px;
+}
+
+.login-input input {
+    width: 100%;
+    border-radius:40px;
+    padding: 14px;
+    transition: all 25s ease;
+    border-color: black;
+    outline: none;
+}
+.input:focus{
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    background-color: #dedede;
+}
+
+.login-container {
+    display: flex;
+    width:100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 40px;
+    padding: 35px;
+    max-width: 400px;
+}
+
+.singpass {
+    width: 100%;
+    text-align: right;
+    padding: 5px;
+}
+
+.btn-login {
+    outline: none;
+    width: 100%;
+    border: 6px;
+    padding: 14px 20px;
+    border-radius: 18px;
+    cursor: pointer;
+    display: block;
+    background-color: #0d7cda;
+    border-color: #0d7cda;
+}
+
+.btn-login:hover {
+    transition: 0.3s ease;
+    background-color: #185990;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.avail-container {
+    font-family: Roboto, sans-serif;
+}
+.avail-btn {
+    color: #f75829;
+    background-color: #ffffff;
+    border-color: #f75829;
+    font-family: Roboto, sans-serif;
+}
+
+.avail-btn:hover,
+.avail-btn.active {
+    background: #f75829;
+    color: #ffffff;
+    border-color: #f75829;
+    cursor: pointer;
+}
+
+.avail-btn:focus {
+    background: #185990;
+}
+
+.input-check {
+    opacity:100;
+}
+
+.date-class {
+    border-radius: 30px;
+    padding: 10px;
+    border-color: black;
+    outline: none;
+}
+
